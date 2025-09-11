@@ -1,14 +1,14 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Alert, StyleSheet, View } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
-import { useForgotPassword } from "../../hooks/auth";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { router } from 'expo-router';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Alert, StyleSheet, View } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { useForgotPassword } from '../../hooks/auth';
 import {
   ForgotPasswordSchema,
   ForgotPasswordSchemaType,
-} from "../../schemas/forgot-password.schema";
+} from '../../schemas/forgot-password.schema';
 
 export const ForgotPasswordForm: React.FC = () => {
   const forgotPasswordMutation = useForgotPassword();
@@ -20,7 +20,7 @@ export const ForgotPasswordForm: React.FC = () => {
   } = useForm<ForgotPasswordSchemaType>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
-      email: "",
+      email: '',
     },
   });
 
@@ -28,33 +28,33 @@ export const ForgotPasswordForm: React.FC = () => {
     forgotPasswordMutation.mutate(data, {
       onSuccess: () => {
         Alert.alert(
-          "Reset Email Sent",
+          'Reset Email Sent',
           "We've sent a password reset link to your email. Please check your inbox and follow the instructions.",
           [
             {
-              text: "OK",
+              text: 'OK',
               onPress: () => {
-                router.replace("/(auth)/sign-in");
+                router.replace('/(auth)/sign-in');
               },
             },
           ]
         );
       },
       onError: (error: any) => {
-        console.error("❌ Password reset request failed:", error);
+        console.error('❌ Password reset request failed:', error);
 
         Alert.alert(
-          "Request Failed",
+          'Request Failed',
           error.response?.data?.message ||
             error.message ||
-            "Failed to send reset email. Please try again."
+            'Failed to send reset email. Please try again.'
         );
       },
     });
   };
 
   const navigateToSignIn = () => {
-    router.push("/(auth)/sign-in");
+    router.push('/(auth)/sign-in');
   };
 
   return (
@@ -68,19 +68,19 @@ export const ForgotPasswordForm: React.FC = () => {
 
         <Controller
           control={control}
-          name='email'
+          name="email"
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              placeholder='your@email.com'
-              label='Email Address'
+              placeholder="your@email.com"
+              label="Email Address"
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              keyboardType='email-address'
-              autoCapitalize='none'
+              keyboardType="email-address"
+              autoCapitalize="none"
               autoCorrect={false}
               errorMessage={errors.email?.message}
-              leftIcon={{ type: "feather", name: "mail", color: "#909296" }}
+              leftIcon={{ type: 'feather', name: 'mail', color: '#909296' }}
               inputStyle={styles.inputText}
               labelStyle={styles.inputLabel}
               inputContainerStyle={[
@@ -92,7 +92,7 @@ export const ForgotPasswordForm: React.FC = () => {
         />
 
         <Button
-          title='Send Reset Email'
+          title="Send Reset Email"
           onPress={handleSubmit(onSubmit)}
           loading={forgotPasswordMutation.isPending}
           disabled={forgotPasswordMutation.isPending}
@@ -103,8 +103,8 @@ export const ForgotPasswordForm: React.FC = () => {
         <View style={styles.backContainer}>
           <Text style={styles.backText}>Remember your password? </Text>
           <Button
-            title='Sign In'
-            type='clear'
+            title="Sign In"
+            type="clear"
             titleStyle={styles.linkText}
             onPress={navigateToSignIn}
           />
@@ -117,15 +117,15 @@ export const ForgotPasswordForm: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     paddingHorizontal: 20,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   formContainer: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     padding: 20,
     borderRadius: 12,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -136,40 +136,40 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#1a1a1a",
-    textAlign: "center",
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    textAlign: 'center',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: "#666666",
-    textAlign: "center",
+    color: '#666666',
+    textAlign: 'center',
     marginBottom: 32,
     lineHeight: 22,
   },
   inputText: {
     fontSize: 16,
-    color: "#1a1a1a",
+    color: '#1a1a1a',
   },
   inputLabel: {
     fontSize: 14,
-    fontWeight: "600",
-    color: "#1a1a1a",
+    fontWeight: '600',
+    color: '#1a1a1a',
     marginBottom: 5,
   },
   inputContainer: {
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: '#e0e0e0',
     paddingHorizontal: 12,
-    backgroundColor: "#fafafa",
+    backgroundColor: '#fafafa',
   },
   inputError: {
-    borderColor: "#ff4757",
+    borderColor: '#ff4757',
   },
   primaryButton: {
-    backgroundColor: "#007AFF",
+    backgroundColor: '#007AFF',
     borderRadius: 8,
     paddingVertical: 14,
     marginTop: 20,
@@ -177,21 +177,21 @@ const styles = StyleSheet.create({
   },
   primaryButtonText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   backContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 10,
   },
   backText: {
     fontSize: 14,
-    color: "#666666",
+    color: '#666666',
   },
   linkText: {
     fontSize: 14,
-    color: "#007AFF",
-    fontWeight: "600",
+    color: '#007AFF',
+    fontWeight: '600',
   },
 });

@@ -1,12 +1,12 @@
-import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
 import {
   ImageBackground,
   ImageSourcePropType,
   StyleSheet,
   Text,
   View,
-} from "react-native";
+} from 'react-native';
 
 interface StoryPreviewProps {
   title: string;
@@ -24,10 +24,10 @@ export const StoryPreview = ({
       <ImageBackground
         source={image}
         style={styles.imageSection}
-        resizeMode='cover'
+        resizeMode="cover"
       >
         <LinearGradient
-          colors={["transparent", "rgba(0,0,0,0.8)"]}
+          colors={['transparent', 'rgba(0,0,0,0.8)']}
           style={styles.gradientOverlay}
         >
           <Text style={styles.cardTitle}>{title}</Text>
@@ -40,33 +40,33 @@ export const StoryPreview = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 12,
     marginBottom: 24,
     elevation: 4,
-    shadowColor: "#25262b",
+    shadowColor: '#25262b',
     //Light mode: "#f8f9fa"
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   imageSection: {
     height: 250,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
   },
   gradientOverlay: {
     padding: 20,
   },
   cardTitle: {
     fontSize: 22,
-    fontWeight: "bold",
-    color: "white",
+    fontWeight: 'bold',
+    color: 'white',
     marginBottom: 8,
   },
   cardDescription: {
     fontSize: 15,
-    color: "white",
+    color: 'white',
     lineHeight: 22,
   },
 });

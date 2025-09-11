@@ -1,69 +1,69 @@
-import Entypo from "@expo/vector-icons/Entypo";
-import Feather from "@expo/vector-icons/Feather";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Tabs } from "expo-router";
+import Entypo from '@expo/vector-icons/Entypo';
+import Feather from '@expo/vector-icons/Feather';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#ffd33d",
+        tabBarActiveTintColor: '#ffd33d',
         headerStyle: {
-          backgroundColor: "#25292e",
+          backgroundColor: '#25292e',
         },
         headerShadowVisible: false,
-        headerTintColor: "#fff",
+        headerTintColor: '#fff',
         tabBarStyle: {
-          backgroundColor: "#25292e",
+          backgroundColor: '#25292e',
         },
       }}
     >
       {/* "book-outline" */}
       <Tabs.Screen
-        name='index'
+        name="index"
         options={{
-          title: "Home",
+          title: 'Home',
           tabBarIcon: ({ color }) => (
-            <Ionicons name='home-outline' color={color} size={24} />
+            <Ionicons name="home-outline" color={color} size={24} />
           ),
         }}
       />
       <Tabs.Screen
-        name='active'
+        name="active"
         options={{
-          title: "Active",
+          title: 'Active',
           tabBarIcon: ({ color }) => (
-            <Ionicons name='book-outline' color={color} size={24} />
+            <Ionicons name="book-outline" color={color} size={24} />
           ),
         }}
       />
       <Tabs.Screen
-        name='history'
+        name="history"
         options={{
-          title: "History",
+          title: 'History',
           tabBarIcon: ({ color }) => (
-            <Entypo name='back-in-time' color={color} size={24} />
+            <Entypo name="back-in-time" color={color} size={24} />
           ),
         }}
       />
       <Tabs.Screen
-        name='stories'
+        name="stories"
         options={{
-          title: "New Story",
+          title: 'New Story',
           tabBarIcon: ({ color }) => (
-            <Feather name='book' color={color} size={24} />
+            <Feather name="book" color={color} size={24} />
           ),
         }}
       />
       <Tabs.Screen
-        name='chats'
+        name="chats"
         options={{
-          title: "Chats",
+          title: 'Chats',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name='chat-outline'
+              name="chat-outline"
               color={color}
               size={24}
             />
@@ -71,11 +71,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='friends'
+        name="friends"
         options={{
-          title: "Friends",
+          title: 'Friends',
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name='users' color={color} size={24} />
+            <FontAwesome5 name="users" color={color} size={24} />
           ),
         }}
       />

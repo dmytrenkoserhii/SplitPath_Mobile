@@ -1,9 +1,9 @@
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { AuthNavigator } from "../components/auth";
-import { AuthProvider } from "../context";
-import { queryClient } from "../lib";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { AuthNavigator } from '../components/auth';
+import { AuthProvider } from '../context';
+import { queryClient } from '../lib';
 
 export default function RootLayout() {
   return (
@@ -13,26 +13,26 @@ export default function RootLayout() {
           <Stack
             screenOptions={{
               headerStyle: {
-                backgroundColor: "#25292e",
+                backgroundColor: '#25292e',
               },
-              headerTintColor: "#fff",
+              headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: "bold",
+                fontWeight: 'bold',
               },
             }}
           >
-            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
             <Stack.Screen
-              name='(auth)'
+              name="(auth)"
               options={{
                 headerShown: false,
-                presentation: "modal",
+                presentation: 'modal',
               }}
             />
           </Stack>
         </AuthNavigator>
-        <StatusBar style='light' />
+        <StatusBar style="light" />
       </AuthProvider>
     </QueryClientProvider>
   );

@@ -1,9 +1,9 @@
-import * as WebBrowser from "expo-web-browser";
-import React, { useState } from "react";
-import { Alert, Platform } from "react-native";
-import { Button } from "react-native-elements";
+import * as WebBrowser from 'expo-web-browser';
+import React, { useState } from 'react';
+import { Alert, Platform } from 'react-native';
+import { Button } from 'react-native-elements';
 // import { useAuth } from "../../context";
-import { xiorClient } from "../../lib";
+import { xiorClient } from '../../lib';
 
 interface GoogleAuthButtonProps {
   title?: string;
@@ -13,7 +13,7 @@ interface GoogleAuthButtonProps {
 }
 
 export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
-  title = "Continue with Google",
+  title = 'Continue with Google',
   isSignUp = false,
   style,
   titleStyle,
@@ -25,45 +25,45 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
     setIsLoading(true);
 
     try {
-      console.log("🔍 Starting Google OAuth...");
+      console.log('🔍 Starting Google OAuth...');
 
       const backendUrl =
         xiorClient.defaults.baseURL ||
         process.env.EXPO_PUBLIC_BACKEND_URL ||
-        (Platform.OS === "web"
-          ? "http://localhost:5050"
-          : "http://192.168.0.100:5050");
+        (Platform.OS === 'web'
+          ? 'http://localhost:5050'
+          : 'http://192.168.0.100:5050');
 
       const googleAuthUrl = `${backendUrl}/auth/google`;
-      console.log("🌐 Opening:", googleAuthUrl);
+      console.log('🌐 Opening:', googleAuthUrl);
 
       const result = await WebBrowser.openBrowserAsync(googleAuthUrl, {
-        dismissButtonStyle: "close",
+        dismissButtonStyle: 'close',
         readerMode: false,
       });
 
-      console.log("📱 Browser closed with result:", result.type);
+      console.log('📱 Browser closed with result:', result.type);
 
-      if (result.type === "cancel" || result.type === "dismiss") {
-        console.log("👤 User cancelled OAuth");
+      if (result.type === 'cancel' || result.type === 'dismiss') {
+        console.log('👤 User cancelled OAuth');
         return;
       }
 
       Alert.alert(
-        "Google Authentication",
-        "If you completed the Google sign in, please close this dialog and try signing in with your email, or restart the app.",
+        'Google Authentication',
+        'If you completed the Google sign in, please close this dialog and try signing in with your email, or restart the app.',
         [
           {
-            text: "OK",
+            text: 'OK',
             onPress: () => {
-              console.log("User completed Google OAuth flow");
+              console.log('User completed Google OAuth flow');
             },
           },
         ]
       );
     } catch (error: any) {
-      console.error("❌ Google OAuth error:", error);
-      Alert.alert("Error", error.message || "Google authentication failed");
+      console.error('❌ Google OAuth error:', error);
+      Alert.alert('Error', error.message || 'Google authentication failed');
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +72,7 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
   return (
     <Button
       title={title}
-      type='outline'
+      type="outline"
       buttonStyle={style}
       titleStyle={titleStyle}
       loading={isLoading}

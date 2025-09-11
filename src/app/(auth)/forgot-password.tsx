@@ -1,12 +1,12 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { ForgotPasswordForm } from "../../components/auth/ForgotPasswordForm";
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { ForgotPasswordForm } from '../../components/auth/ForgotPasswordForm';
 
 export default function ForgotPasswordScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style='dark' />
+      <StatusBar style="dark" />
       <ForgotPasswordForm />
     </SafeAreaView>
   );
@@ -15,6 +15,6 @@ export default function ForgotPasswordScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 });

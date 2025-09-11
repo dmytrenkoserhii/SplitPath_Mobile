@@ -2,21 +2,21 @@ import xior, {
   XiorError,
   XiorInterceptorRequestConfig,
   XiorRequestConfig,
-} from "xior";
-import { storage } from "./storage";
+} from 'xior';
+import { storage } from './storage';
 
 const BACKEND_URL =
-  process.env.EXPO_PUBLIC_BACKEND_URL || "http://192.168.0.100:5050";
+  process.env.EXPO_PUBLIC_BACKEND_URL || 'http://192.168.0.100:5050';
 
 if (!BACKEND_URL) {
-  throw new Error("Missing environment variable: EXPO_PUBLIC_BACKEND_URL");
+  throw new Error('Missing environment variable: EXPO_PUBLIC_BACKEND_URL');
 }
 
 export const xiorClient = xior.create({
   baseURL: BACKEND_URL,
   timeout: 10000,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -28,7 +28,7 @@ let failedQueue: {
 }[] = [];
 
 const processQueue = (error: XiorError | null) => {
-  failedQueue.forEach((prom) => {
+  failedQueue.forEach(prom => {
     if (!error) {
       // Retry the original request with new token
       prom.resolve(xiorClient.request(prom.config));
@@ -50,7 +50,7 @@ const requestInterceptor = async (config: XiorInterceptorRequestConfig) => {
       };
     }
   } catch (error) {
-    console.error("Error adding auth token to request:", error);
+    console.error('Error adding auth token to request:', error);
   }
 
   return config;
@@ -61,13 +61,13 @@ const responseErrorInterceptor = async (error: XiorError) => {
 
   if (
     error.response?.status === 401 &&
-    !originalRequest?.url?.includes("/auth/sign-in") &&
-    !originalRequest?.url?.includes("/auth/refresh")
+    !originalRequest?.url?.includes('/auth/sign-in') &&
+    !originalRequest?.url?.includes('/auth/refresh')
   ) {
     const hasTokens = await storage.hasAuthTokens();
 
     if (!hasTokens) {
-      console.log("🍪 Cookie-based auth detected, skipping token refresh");
+      console.log('🍪 Cookie-based auth detected, skipping token refresh');
       return Promise.reject(error);
     }
 
@@ -78,10 +78,10 @@ const responseErrorInterceptor = async (error: XiorError) => {
         const refreshToken = await storage.getRefreshToken();
 
         if (!refreshToken) {
-          throw new Error("No refresh token available");
+          throw new Error('No refresh token available');
         }
 
-        const refreshResponse = await xiorClient.post("/auth/refresh", {
+        const refreshResponse = await xiorClient.post('/auth/refresh', {
           refreshToken,
         });
 
@@ -109,7 +109,7 @@ const responseErrorInterceptor = async (error: XiorError) => {
 
         await storage.clearAuthData();
 
-        console.error("Token refresh failed, user needs to login again");
+        console.error('Token refresh failed, user needs to login again');
 
         return Promise.reject(refreshError);
       }
@@ -129,7 +129,7 @@ const responseErrorInterceptor = async (error: XiorError) => {
 
 xiorClient.interceptors.request.use(requestInterceptor);
 xiorClient.interceptors.response.use(
-  (response) => response,
+  response => response,
   responseErrorInterceptor
 );
 
@@ -144,7 +144,7 @@ export const isAuthenticated = async (): Promise<boolean> => {
   try {
     return await storage.hasAuthTokens();
   } catch (error) {
-    console.error("Error checking authentication status:", error);
+    console.error('Error checking authentication status:', error);
     return false;
   }
 };

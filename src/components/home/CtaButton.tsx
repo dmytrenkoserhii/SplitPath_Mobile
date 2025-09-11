@@ -1,7 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 interface CtaButtonProps {
   onPress: () => void;
@@ -13,7 +13,7 @@ export const CtaButton = ({ onPress, title, iconName }: CtaButtonProps) => {
   return (
     <TouchableOpacity style={styles.ctaButtonContainer} onPress={onPress}>
       <LinearGradient
-        colors={["#ff8809", "#ff6b6b"]}
+        colors={['#ff8809', '#ff6b6b']}
         style={styles.ctaButton}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -22,7 +22,7 @@ export const CtaButton = ({ onPress, title, iconName }: CtaButtonProps) => {
           <Ionicons
             name={iconName}
             size={20}
-            color='white'
+            color="white"
             style={styles.buttonIcon}
           />
         )}
@@ -35,9 +35,9 @@ export const CtaButton = ({ onPress, title, iconName }: CtaButtonProps) => {
 const styles = StyleSheet.create({
   ctaButtonContainer: {
     borderRadius: 8,
-    overflow: "hidden",
+    overflow: 'hidden',
     elevation: 3,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
   ctaButton: {
     paddingHorizontal: 32,
     paddingVertical: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   ctaButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   buttonIcon: {
     marginRight: 8,

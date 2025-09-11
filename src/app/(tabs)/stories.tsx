@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function StoriesScreen() {
   return (
@@ -11,11 +11,11 @@ export default function StoriesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#25292e",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#25292e',
   },
   text: {
-    color: "#fff",
+    color: '#fff',
   },
 });

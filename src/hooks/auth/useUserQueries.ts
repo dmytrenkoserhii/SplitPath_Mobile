@@ -1,7 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { queryKeys, queryOptions } from "../../lib";
-import { usersService } from "../../services";
-import { User } from "../../types/user";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { queryKeys, queryOptions } from '../../lib';
+import { usersService } from '../../services';
+import { User } from '../../types/user';
 
 export const useUserById = (id: number) => {
   return useQuery({
@@ -38,10 +38,10 @@ export const useVerifyEmail = () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.currentUser });
       queryClient.invalidateQueries({ queryKey: queryKeys.user });
 
-      console.log("✅ Email verification successful");
+      console.log('✅ Email verification successful');
     },
     onError: (error: any) => {
-      console.error("❌ Email verification failed:", error);
+      console.error('❌ Email verification failed:', error);
     },
   });
 };
@@ -52,10 +52,10 @@ export const useResendVerificationEmail = () => {
       await usersService.resendVerificationEmail();
     },
     onSuccess: () => {
-      console.log("✅ Verification email sent");
+      console.log('✅ Verification email sent');
     },
     onError: (error: any) => {
-      console.error("❌ Resend verification email failed:", error);
+      console.error('❌ Resend verification email failed:', error);
     },
   });
 };
@@ -81,10 +81,10 @@ export const useDeleteUser = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.user });
-      console.log("✅ User deleted successfully");
+      console.log('✅ User deleted successfully');
     },
     onError: (error: any) => {
-      console.error("❌ User deletion failed:", error);
+      console.error('❌ User deletion failed:', error);
     },
   });
 };

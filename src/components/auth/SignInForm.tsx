@@ -1,15 +1,15 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Alert, StyleSheet, View } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
-import { useGoogleAuth } from "../../hooks";
-import { useSignIn } from "../../hooks/auth";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { router } from 'expo-router';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Alert, StyleSheet, View } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { useGoogleAuth } from '../../hooks';
+import { useSignIn } from '../../hooks/auth';
 import {
   SignInFormSchema,
   SignInFormSchemaType,
-} from "../../schemas/sign-in.schema";
+} from '../../schemas/sign-in.schema';
 
 export const SignInForm: React.FC = () => {
   const signInMutation = useSignIn();
@@ -22,37 +22,37 @@ export const SignInForm: React.FC = () => {
   } = useForm<SignInFormSchemaType>({
     resolver: zodResolver(SignInFormSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
   const onSubmit = async (data: SignInFormSchemaType) => {
     signInMutation.mutate(data, {
       onSuccess: () => {
-        Alert.alert("Success");
+        Alert.alert('Success');
 
-        router.replace("/(tabs)");
+        router.replace('/(tabs)');
       },
       onError: (error: any) => {
-        console.error("❌ Sign in error:", error);
+        console.error('❌ Sign in error:', error);
 
         Alert.alert(
-          "Sign In Failed",
+          'Sign In Failed',
           error.response?.data?.message ||
             error.message ||
-            "Invalid email or password. Please try again."
+            'Invalid email or password. Please try again.'
         );
       },
     });
   };
 
   const navigateToSignUp = () => {
-    router.push("/(auth)/sign-up");
+    router.push('/(auth)/sign-up');
   };
 
   const navigateToForgotPassword = () => {
-    router.push("/(auth)/forgot-password");
+    router.push('/(auth)/forgot-password');
   };
 
   return (
@@ -63,19 +63,19 @@ export const SignInForm: React.FC = () => {
 
         <Controller
           control={control}
-          name='email'
+          name="email"
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              placeholder='your@email.com'
-              label='Email'
+              placeholder="your@email.com"
+              label="Email"
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              keyboardType='email-address'
-              autoCapitalize='none'
+              keyboardType="email-address"
+              autoCapitalize="none"
               autoCorrect={false}
               errorMessage={errors.email?.message}
-              leftIcon={{ type: "feather", name: "mail", color: "#909296" }}
+              leftIcon={{ type: 'feather', name: 'mail', color: '#909296' }}
               inputStyle={styles.inputText}
               labelStyle={styles.inputLabel}
               inputContainerStyle={[
@@ -88,17 +88,17 @@ export const SignInForm: React.FC = () => {
 
         <Controller
           control={control}
-          name='password'
+          name="password"
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              placeholder='Your password'
-              label='Password'
+              placeholder="Your password"
+              label="Password"
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
               secureTextEntry
               errorMessage={errors.password?.message}
-              leftIcon={{ type: "feather", name: "lock", color: "#909296" }}
+              leftIcon={{ type: 'feather', name: 'lock', color: '#909296' }}
               inputStyle={styles.inputText}
               labelStyle={styles.inputLabel}
               inputContainerStyle={[
@@ -111,15 +111,15 @@ export const SignInForm: React.FC = () => {
 
         <View style={styles.forgotPasswordContainer}>
           <Button
-            title='Forgot password?'
-            type='clear'
+            title="Forgot password?"
+            type="clear"
             titleStyle={styles.linkText}
             onPress={navigateToForgotPassword}
           />
         </View>
 
         <Button
-          title='Sign In'
+          title="Sign In"
           onPress={handleSubmit(onSubmit)}
           loading={signInMutation.isPending}
           disabled={signInMutation.isPending}
@@ -134,8 +134,8 @@ export const SignInForm: React.FC = () => {
         </View>
 
         <Button
-          title='Continue with Google'
-          type='outline'
+          title="Continue with Google"
+          type="outline"
           buttonStyle={styles.googleButton}
           titleStyle={styles.googleButtonText}
           loading={isGoogleLoading}
@@ -144,11 +144,11 @@ export const SignInForm: React.FC = () => {
             try {
               const user = await signInWithGoogle();
               if (user) {
-                Alert.alert("Success", "Google sign in completed!");
-                router.replace("/(tabs)");
+                Alert.alert('Success', 'Google sign in completed!');
+                router.replace('/(tabs)');
               }
             } catch (error: any) {
-              Alert.alert("Error", error.message || "Google sign in failed");
+              Alert.alert('Error', error.message || 'Google sign in failed');
             }
           }}
         />
@@ -156,8 +156,8 @@ export const SignInForm: React.FC = () => {
         <View style={styles.signUpContainer}>
           <Text style={styles.signUpText}>Don&apos;t have an account? </Text>
           <Button
-            title='Sign Up'
-            type='clear'
+            title="Sign Up"
+            type="clear"
             titleStyle={styles.linkText}
             onPress={navigateToSignUp}
           />
@@ -170,15 +170,15 @@ export const SignInForm: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a1b1e",
-    justifyContent: "center",
+    backgroundColor: '#1a1b1e',
+    justifyContent: 'center',
     padding: 20,
   },
   formContainer: {
-    backgroundColor: "#25262b",
+    backgroundColor: '#25262b',
     borderRadius: 12,
     padding: 24,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -189,92 +189,92 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#ff8809",
-    textAlign: "center",
+    fontWeight: 'bold',
+    color: '#ff8809',
+    textAlign: 'center',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: "#909296",
-    textAlign: "center",
+    color: '#909296',
+    textAlign: 'center',
     marginBottom: 32,
   },
   inputLabel: {
-    color: "#ff8809",
+    color: '#ff8809',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 8,
   },
   inputContainer: {
     borderBottomWidth: 1,
-    borderBottomColor: "#404048",
-    backgroundColor: "#1a1b1e",
+    borderBottomColor: '#404048',
+    backgroundColor: '#1a1b1e',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 4,
   },
   inputText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 16,
     marginLeft: 8,
   },
   inputError: {
-    borderBottomColor: "#fa5252",
+    borderBottomColor: '#fa5252',
   },
   forgotPasswordContainer: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     marginTop: -16,
     marginBottom: 24,
   },
   linkText: {
-    color: "#ff8809",
+    color: '#ff8809',
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   primaryButton: {
-    backgroundColor: "#ff8809",
+    backgroundColor: '#ff8809',
     borderRadius: 8,
     paddingVertical: 16,
     marginBottom: 24,
   },
   primaryButtonText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   dividerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 24,
   },
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: "#404048",
+    backgroundColor: '#404048',
   },
   dividerText: {
-    color: "#909296",
+    color: '#909296',
     marginHorizontal: 16,
     fontSize: 14,
   },
   googleButton: {
-    borderColor: "#404048",
+    borderColor: '#404048',
     borderWidth: 1,
     borderRadius: 8,
     paddingVertical: 16,
     marginBottom: 24,
   },
   googleButtonText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 16,
   },
   signUpContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   signUpText: {
-    color: "#909296",
+    color: '#909296',
     fontSize: 14,
   },
 });

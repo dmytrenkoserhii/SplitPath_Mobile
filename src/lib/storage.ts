@@ -1,21 +1,21 @@
-import { Platform } from "react-native";
+import { Platform } from 'react-native';
 
-const isWeb = Platform.OS === "web";
+const isWeb = Platform.OS === 'web';
 
 let SecureStore: any;
 if (!isWeb) {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  SecureStore = require("expo-secure-store");
+  SecureStore = require('expo-secure-store');
 }
 
-const ACCESS_TOKEN_KEY = "access_token";
-const REFRESH_TOKEN_KEY = "refresh_token";
-const USER_DATA_KEY = "user_data";
+const ACCESS_TOKEN_KEY = 'access_token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
+const USER_DATA_KEY = 'user_data';
 
 export const storage = {
   async setAccessToken(token: string): Promise<void> {
     try {
-      const tokenString = typeof token === "string" ? token : String(token);
+      const tokenString = typeof token === 'string' ? token : String(token);
 
       if (isWeb) {
         localStorage.setItem(ACCESS_TOKEN_KEY, tokenString);
@@ -23,7 +23,7 @@ export const storage = {
         await SecureStore.setItemAsync(ACCESS_TOKEN_KEY, tokenString);
       }
     } catch (error) {
-      console.error("Error storing access token:", error);
+      console.error('Error storing access token:', error);
       throw error;
     }
   },
@@ -36,14 +36,14 @@ export const storage = {
         return await SecureStore.getItemAsync(ACCESS_TOKEN_KEY);
       }
     } catch (error) {
-      console.error("Error retrieving access token:", error);
+      console.error('Error retrieving access token:', error);
       return null;
     }
   },
 
   async setRefreshToken(token: string): Promise<void> {
     try {
-      const tokenString = typeof token === "string" ? token : String(token);
+      const tokenString = typeof token === 'string' ? token : String(token);
 
       if (isWeb) {
         localStorage.setItem(REFRESH_TOKEN_KEY, tokenString);
@@ -51,7 +51,7 @@ export const storage = {
         await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, tokenString);
       }
     } catch (error) {
-      console.error("Error storing refresh token:", error);
+      console.error('Error storing refresh token:', error);
       throw error;
     }
   },
@@ -64,7 +64,7 @@ export const storage = {
         return await SecureStore.getItemAsync(REFRESH_TOKEN_KEY);
       }
     } catch (error) {
-      console.error("Error retrieving refresh token:", error);
+      console.error('Error retrieving refresh token:', error);
       return null;
     }
   },
@@ -77,7 +77,7 @@ export const storage = {
         await SecureStore.setItemAsync(USER_DATA_KEY, userData);
       }
     } catch (error) {
-      console.error("Error storing user data:", error);
+      console.error('Error storing user data:', error);
       throw error;
     }
   },
@@ -90,7 +90,7 @@ export const storage = {
         return await SecureStore.getItemAsync(USER_DATA_KEY);
       }
     } catch (error) {
-      console.error("Error retrieving user data:", error);
+      console.error('Error retrieving user data:', error);
       return null;
     }
   },
@@ -109,7 +109,7 @@ export const storage = {
         ]);
       }
     } catch (error) {
-      console.error("Error clearing auth data:", error);
+      console.error('Error clearing auth data:', error);
       throw error;
     }
   },
@@ -120,7 +120,7 @@ export const storage = {
       const refreshToken = await this.getRefreshToken();
       return !!(accessToken && refreshToken);
     } catch (error) {
-      console.error("Error checking auth tokens:", error);
+      console.error('Error checking auth tokens:', error);
       return false;
     }
   },

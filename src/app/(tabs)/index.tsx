@@ -1,26 +1,26 @@
-import { router } from "expo-router";
-import React from "react";
+import { router } from 'expo-router';
+import React from 'react';
 import {
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import { LogoutButton } from "../../components/auth";
-import { CtaButton } from "../../components/home/CtaButton";
-import { Feature } from "../../components/home/Feature";
-import { StepItem } from "../../components/home/StepItem";
-import { StoryPreview } from "../../components/home/StoryPreview";
+} from 'react-native';
+import { LogoutButton } from '../../components/auth';
+import { CtaButton } from '../../components/home/CtaButton';
+import { Feature } from '../../components/home/Feature';
+import { StepItem } from '../../components/home/StepItem';
+import { StoryPreview } from '../../components/home/StoryPreview';
 import {
   FEATURED_STORIES,
   FEATURES,
   HOW_IT_WORKS_STEPS,
-} from "../../constants/home";
-import { useAuth } from "../../context";
+} from '../../constants/home';
+import { useAuth } from '../../context';
 
 export default function HomeScreen() {
-  const navigateToStories = () => router.push("/(tabs)/stories");
+  const navigateToStories = () => router.push('/(tabs)/stories');
   const { user, isAuthenticated } = useAuth();
 
   return (
@@ -52,8 +52,8 @@ export default function HomeScreen() {
                   ]}
                 >
                   {user.isEmailVerified
-                    ? "✅ Email Verified"
-                    : "⚠️ Email Not Verified"}
+                    ? '✅ Email Verified'
+                    : '⚠️ Email Not Verified'}
                 </Text>
               </View>
 
@@ -64,7 +64,7 @@ export default function HomeScreen() {
                   </Text>
                   <TouchableOpacity
                     style={styles.verifyButton}
-                    onPress={() => router.push("/(auth)/email-verification")}
+                    onPress={() => router.push('/(auth)/email-verification')}
                   >
                     <Text style={styles.verifyButtonText}>Verify Email</Text>
                   </TouchableOpacity>
@@ -78,11 +78,11 @@ export default function HomeScreen() {
           Experience interactive storytelling powered by AI. Every choice
           matters, every story is unique.
         </Text>
-        <CtaButton onPress={navigateToStories} title='Start Your Adventure' />
+        <CtaButton onPress={navigateToStories} title="Start Your Adventure" />
 
         {isAuthenticated && (
           <View style={styles.logoutContainer}>
-            <LogoutButton title='Sign Out' />
+            <LogoutButton title="Sign Out" />
           </View>
         )}
       </View>
@@ -112,8 +112,8 @@ export default function HomeScreen() {
       <View style={styles.finalCta}>
         <CtaButton
           onPress={navigateToStories}
-          title='Start Writing Your Story'
-          iconName='sparkles'
+          title="Start Writing Your Story"
+          iconName="sparkles"
         />
       </View>
     </ScrollView>
@@ -123,7 +123,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a1b1e",
+    backgroundColor: '#1a1b1e',
     //Light mode: "#ffffff"
   },
   section: {
@@ -134,26 +134,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 80,
     paddingBottom: 60,
-    alignItems: "center",
+    alignItems: 'center',
   },
   finalCta: {
     paddingHorizontal: 20,
     paddingVertical: 50,
-    alignItems: "center",
+    alignItems: 'center',
   },
   heroTitle: {
     fontSize: 42,
-    fontWeight: "900",
-    color: "#ff8809",
-    textAlign: "center",
+    fontWeight: '900',
+    color: '#ff8809',
+    textAlign: 'center',
     marginBottom: 16,
     lineHeight: 48,
   },
   heroDescription: {
     fontSize: 18,
-    color: "#909296",
+    color: '#909296',
     // Light mode: "#868e96"
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: 40,
     paddingHorizontal: 20,
     lineHeight: 24,
@@ -161,29 +161,29 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 32,
-    fontWeight: "700",
-    color: "#ff8809",
-    textAlign: "center",
+    fontWeight: '700',
+    color: '#ff8809',
+    textAlign: 'center',
     marginBottom: 40,
   },
   stepsList: {
     paddingHorizontal: 10,
   },
   userSection: {
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
     marginBottom: 20,
   },
   welcomeText: {
     fontSize: 18,
-    color: "#ff8809",
-    textAlign: "center",
+    color: '#ff8809',
+    textAlign: 'center',
     marginBottom: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   verificationContainer: {
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
   },
   verificationBadge: {
     paddingHorizontal: 16,
@@ -192,49 +192,49 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   verifiedBadge: {
-    backgroundColor: "#d1fae5",
-    borderColor: "#10b981",
+    backgroundColor: '#d1fae5',
+    borderColor: '#10b981',
     borderWidth: 1,
   },
   unverifiedBadge: {
-    backgroundColor: "#fef3c7",
-    borderColor: "#f59e0b",
+    backgroundColor: '#fef3c7',
+    borderColor: '#f59e0b',
     borderWidth: 1,
   },
   verificationText: {
     fontSize: 14,
-    fontWeight: "600",
-    textAlign: "center",
+    fontWeight: '600',
+    textAlign: 'center',
   },
   verifiedText: {
-    color: "#065f46",
+    color: '#065f46',
   },
   unverifiedText: {
-    color: "#92400e",
+    color: '#92400e',
   },
   verifyButtonContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 5,
   },
   verifyDescription: {
     fontSize: 12,
-    color: "#909296",
-    textAlign: "center",
+    color: '#909296',
+    textAlign: 'center',
     marginBottom: 8,
   },
   verifyButton: {
-    backgroundColor: "#3b82f6",
+    backgroundColor: '#3b82f6',
     paddingHorizontal: 20,
     paddingVertical: 8,
     borderRadius: 8,
   },
   verifyButtonText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   logoutContainer: {
     marginTop: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
 });

@@ -1,2 +1,2 @@
 // Export all context providers and hooks
-export { AuthProvider, useAuth } from "./AuthContext";
+export { AuthProvider, useAuth } from './AuthContext';

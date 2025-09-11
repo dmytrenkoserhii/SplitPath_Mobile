@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ResetPasswordSchema = z
   .object({
     password: z
       .string()
-      .min(6, "Password must be at least 6 characters")
+      .min(6, 'Password must be at least 6 characters')
       .superRefine((password, checkPassComplexity) => {
         const containsUppercase = /[A-Z]/.test(password);
         const containsLowercase = /[a-z]/.test(password);
@@ -14,41 +14,41 @@ export const ResetPasswordSchema = z
 
         if (!containsUppercase) {
           checkPassComplexity.addIssue({
-            code: "custom",
-            message: "Password must contain at least one uppercase letter!",
+            code: 'custom',
+            message: 'Password must contain at least one uppercase letter!',
           });
         }
 
         if (!containsLowercase) {
           checkPassComplexity.addIssue({
-            code: "custom",
-            message: "Password must contain at least one lowercase letter!",
+            code: 'custom',
+            message: 'Password must contain at least one lowercase letter!',
           });
         }
 
         if (!containsNumber) {
           checkPassComplexity.addIssue({
-            code: "custom",
-            message: "Password must contain at least one number!",
+            code: 'custom',
+            message: 'Password must contain at least one number!',
           });
         }
 
         if (!containsSpecialChar) {
           checkPassComplexity.addIssue({
-            code: "custom",
-            message: "Password must contain at least one special character!",
+            code: 'custom',
+            message: 'Password must contain at least one special character!',
           });
         }
       }),
     confirmPassword: z.string(),
   })
-  .refine((values) => values.password === values.confirmPassword, {
-    message: "Passwords must match!",
-    path: ["confirmPassword"],
+  .refine(values => values.password === values.confirmPassword, {
+    message: 'Passwords must match!',
+    path: ['confirmPassword'],
   });
 
 export type ResetPasswordSchemaType = z.infer<typeof ResetPasswordSchema>;
 export type ResetPasswordDataType = Omit<
   z.infer<typeof ResetPasswordSchema>,
-  "confirmPassword"
+  'confirmPassword'
 >;

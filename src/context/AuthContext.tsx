@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from "react";
-import { useCurrentUser } from "../hooks/auth";
-import { AuthContextType } from "../types/auth";
+import React, { createContext, useContext } from 'react';
+import { useCurrentUser } from '../hooks/auth';
+import { AuthContextType } from '../types/auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -18,7 +18,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const isAuthenticated = !!user && !error;
 
-  console.log("🔐 AuthProvider state:", {
+  console.log('🔐 AuthProvider state:', {
     hasUser: !!user,
     isLoading,
     isAuthenticated,
@@ -43,7 +43,7 @@ export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
 
   return context;

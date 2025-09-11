@@ -1,22 +1,22 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SignUpFormSchema = z
   .object({
-    username: z.string().min(3, "Username must be at least 3 characters"),
-    email: z.string().email("Please enter a valid email"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    username: z.string().min(3, 'Username must be at least 3 characters'),
+    email: z.string().email('Please enter a valid email'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
     passwordConfirmation: z.string(),
-    terms: z.boolean().refine((terms) => terms === true, {
-      message: "You must accept the terms and conditions",
+    terms: z.boolean().refine(terms => terms === true, {
+      message: 'You must accept the terms and conditions',
     }),
   })
   .refine(
-    (values) => {
+    values => {
       return values.password === values.passwordConfirmation;
     },
     {
-      message: "Passwords must match!",
-      path: ["passwordConfirmation"],
+      message: 'Passwords must match!',
+      path: ['passwordConfirmation'],
     }
   )
   .superRefine(({ password }, checkPassComplexity) => {
@@ -29,33 +29,33 @@ export const SignUpFormSchema = z
 
     if (!containsUppercase) {
       checkPassComplexity.addIssue({
-        code: "custom",
-        path: ["password"],
-        message: "Password must contain at least one uppercase letter!",
+        code: 'custom',
+        path: ['password'],
+        message: 'Password must contain at least one uppercase letter!',
       });
     }
 
     if (!containsLowercase) {
       checkPassComplexity.addIssue({
-        code: "custom",
-        path: ["password"],
-        message: "Password must contain at least one lowercase letter!",
+        code: 'custom',
+        path: ['password'],
+        message: 'Password must contain at least one lowercase letter!',
       });
     }
 
     if (!containsNumber) {
       checkPassComplexity.addIssue({
-        code: "custom",
-        path: ["password"],
-        message: "Password must contain at least one number!",
+        code: 'custom',
+        path: ['password'],
+        message: 'Password must contain at least one number!',
       });
     }
 
     if (!containsSpecialChar) {
       checkPassComplexity.addIssue({
-        code: "custom",
-        path: ["password"],
-        message: "Password must contain at least one special character!",
+        code: 'custom',
+        path: ['password'],
+        message: 'Password must contain at least one special character!',
       });
     }
   });
@@ -63,5 +63,5 @@ export const SignUpFormSchema = z
 export type SignUpFormSchemaType = z.infer<typeof SignUpFormSchema>;
 export type SignUpDataType = Omit<
   z.infer<typeof SignUpFormSchema>,
-  "passwordConfirmation" | "terms"
+  'passwordConfirmation' | 'terms'
 >;

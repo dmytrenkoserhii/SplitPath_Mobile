@@ -1,4 +1,4 @@
-import { Story } from "./story.interface";
+import { Story } from './story.interface';
 
 export interface StorySegment {
   id: number;

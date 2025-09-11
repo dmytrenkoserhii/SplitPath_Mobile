@@ -1,19 +1,19 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient } from '@tanstack/react-query';
 
 export const queryKeys = {
-  user: ["user"] as const,
-  currentUser: ["user", "current"] as const,
-  userById: (id: number) => ["user", "id", id] as const,
-  userByEmail: (email: string) => ["user", "email", email] as const,
+  user: ['user'] as const,
+  currentUser: ['user', 'current'] as const,
+  userById: (id: number) => ['user', 'id', id] as const,
+  userByEmail: (email: string) => ['user', 'email', email] as const,
 
-  auth: ["auth"] as const,
-  authStatus: ["auth", "status"] as const,
+  auth: ['auth'] as const,
+  authStatus: ['auth', 'status'] as const,
 
-  stories: ["stories"] as const,
-  story: (id: number) => ["stories", id] as const,
+  stories: ['stories'] as const,
+  story: (id: number) => ['stories', id] as const,
 
-  friends: ["friends"] as const,
-  friendRequests: ["friends", "requests"] as const,
+  friends: ['friends'] as const,
+  friendRequests: ['friends', 'requests'] as const,
 } as const;
 
 const defaultQueryOptions = {

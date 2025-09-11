@@ -1,21 +1,21 @@
-import { router } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
-import { Button, Text } from "react-native-elements";
+import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 
 export default function EmailConfirmationScreen() {
   const navigateToDashboard = () => {
-    router.replace("/(tabs)");
+    router.replace('/(tabs)');
   };
 
   const navigateToSignIn = () => {
-    router.replace("/(auth)/sign-in");
+    router.replace('/(auth)/sign-in');
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style='light' backgroundColor='#1a1b1e' />
+      <StatusBar style="light" backgroundColor="#1a1b1e" />
       <View style={styles.content}>
         <View style={styles.card}>
           <Text style={styles.title}>Verify Your Email</Text>
@@ -36,15 +36,15 @@ export default function EmailConfirmationScreen() {
 
           <View style={styles.buttonContainer}>
             <Button
-              title='Continue to Dashboard'
+              title="Continue to Dashboard"
               buttonStyle={styles.primaryButton}
               titleStyle={styles.primaryButtonText}
               onPress={navigateToDashboard}
             />
 
             <Button
-              title='Back to Sign In'
-              type='outline'
+              title="Back to Sign In"
+              type="outline"
               buttonStyle={styles.secondaryButton}
               titleStyle={styles.secondaryButtonText}
               onPress={navigateToSignIn}
@@ -59,18 +59,18 @@ export default function EmailConfirmationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a1b1e",
+    backgroundColor: '#1a1b1e',
   },
   content: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     padding: 20,
   },
   card: {
-    backgroundColor: "#25262b",
+    backgroundColor: '#25262b',
     borderRadius: 12,
     padding: 32,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -81,22 +81,22 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#ff8809",
-    textAlign: "center",
+    fontWeight: 'bold',
+    color: '#ff8809',
+    textAlign: 'center',
     marginBottom: 24,
   },
   message: {
     fontSize: 16,
-    color: "#ffffff",
-    textAlign: "center",
+    color: '#ffffff',
+    textAlign: 'center',
     marginBottom: 16,
     lineHeight: 24,
   },
   subtitle: {
     fontSize: 14,
-    color: "#909296",
-    textAlign: "center",
+    color: '#909296',
+    textAlign: 'center',
     marginBottom: 32,
     lineHeight: 20,
   },
@@ -104,22 +104,22 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   primaryButton: {
-    backgroundColor: "#ff8809",
+    backgroundColor: '#ff8809',
     borderRadius: 8,
     paddingVertical: 16,
   },
   primaryButtonText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   secondaryButton: {
-    borderColor: "#404048",
+    borderColor: '#404048',
     borderWidth: 1,
     borderRadius: 8,
     paddingVertical: 16,
   },
   secondaryButtonText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 16,
   },
 });
