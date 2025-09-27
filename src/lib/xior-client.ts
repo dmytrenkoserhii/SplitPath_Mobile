@@ -18,6 +18,7 @@ export const xiorClient = xior.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 let isRefreshing = false;
@@ -30,7 +31,6 @@ let failedQueue: {
 const processQueue = (error: XiorError | null) => {
   failedQueue.forEach(prom => {
     if (!error) {
-      // Retry the original request with new token
       prom.resolve(xiorClient.request(prom.config));
     } else {
       prom.reject(error);
@@ -41,16 +41,41 @@ const processQueue = (error: XiorError | null) => {
 
 const requestInterceptor = async (config: XiorInterceptorRequestConfig) => {
   try {
+    const hasTokens = await storage.hasAuthTokens();
     const accessToken = await storage.getAccessToken();
+    const refreshToken = await storage.getRefreshToken();
 
-    if (accessToken) {
+    console.log('🔍 Auth check:', {
+      hasTokens,
+      hasAccessToken: !!accessToken,
+      hasRefreshToken: !!refreshToken,
+      url: config.url,
+    });
+
+    if (hasTokens && accessToken) {
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${accessToken}`,
       };
+      console.log('Using token-based authentication');
+    } else {
+      console.log('Using cookie-based authentication for request');
+
+      if (accessToken) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${accessToken}`,
+        };
+        console.log('Using stored access token for cookie-based auth');
+      } else {
+        console.log('No access token available - relying on cookies only');
+      }
     }
+
+    console.log('Request headers:', config.headers);
+    console.log('Request URL:', config.url);
   } catch (error) {
-    console.error('Error adding auth token to request:', error);
+    console.error('Error in request interceptor:', error);
   }
 
   return config;
@@ -58,6 +83,14 @@ const requestInterceptor = async (config: XiorInterceptorRequestConfig) => {
 
 const responseErrorInterceptor = async (error: XiorError) => {
   const originalRequest = error.config;
+
+  console.log('Request failed:', {
+    url: originalRequest?.url,
+    method: originalRequest?.method,
+    status: error.response?.status,
+    statusText: error.response?.statusText,
+    data: error.response?.data,
+  });
 
   if (
     error.response?.status === 401 &&
@@ -67,7 +100,8 @@ const responseErrorInterceptor = async (error: XiorError) => {
     const hasTokens = await storage.hasAuthTokens();
 
     if (!hasTokens) {
-      console.log('🍪 Cookie-based auth detected, skipping token refresh');
+      console.log('Cookie-based auth detected, skipping token refresh');
+      console.log('Error details:', error.response?.data);
       return Promise.reject(error);
     }
 
@@ -127,9 +161,26 @@ const responseErrorInterceptor = async (error: XiorError) => {
   return Promise.reject(error);
 };
 
+const responseInterceptor = (response: any) => {
+  console.log('Response received:', response.status, response.config.url);
+
+  console.log('Response data:', response.data);
+
+  if (response.config.url?.includes('/auth/sign-in')) {
+    console.log('Sign-in response data:', response.data);
+    if (response.data?.accessToken) {
+      console.log('Server sent access token in response body');
+    } else {
+      console.log('Server did NOT send access token in response body');
+    }
+  }
+
+  return response;
+};
+
 xiorClient.interceptors.request.use(requestInterceptor);
 xiorClient.interceptors.response.use(
-  response => response,
+  responseInterceptor,
   responseErrorInterceptor
 );
 
