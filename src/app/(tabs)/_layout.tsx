@@ -1,5 +1,3 @@
-import Entypo from '@expo/vector-icons/Entypo';
-import Feather from '@expo/vector-icons/Feather';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -20,7 +18,6 @@ export default function TabLayout() {
         },
       }}
     >
-      {/* "book-outline" */}
       <Tabs.Screen
         name="index"
         options={{
@@ -31,29 +28,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="active"
-        options={{
-          title: 'Active',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="book-outline" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="history"
-        options={{
-          title: 'History',
-          tabBarIcon: ({ color }) => (
-            <Entypo name="back-in-time" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="stories"
         options={{
-          title: 'New Story',
+          // We hide the header here because the nested top tab navigator
+          // inside the 'stories' directory will manage its own title.
+          headerShown: false,
+          title: 'Stories',
           tabBarIcon: ({ color }) => (
-            <Feather name="book" color={color} size={24} />
+            <Ionicons name="book-outline" color={color} size={24} />
           ),
         }}
       />
@@ -82,4 +64,3 @@ export default function TabLayout() {
     </Tabs>
   );
 }
-//
