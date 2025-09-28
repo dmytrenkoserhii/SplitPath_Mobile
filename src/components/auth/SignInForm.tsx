@@ -9,7 +9,7 @@ import { useSignIn } from '../../hooks/auth';
 import {
   SignInFormSchema,
   SignInFormSchemaType,
-} from '../../schemas/sign-in.schema';
+} from '../../schemas/auth/sign-in.schema';
 
 export const SignInForm: React.FC = () => {
   const signInMutation = useSignIn();

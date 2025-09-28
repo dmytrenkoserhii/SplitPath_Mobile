@@ -8,7 +8,7 @@ import { useForgotPassword } from '../../hooks/auth';
 import {
   ForgotPasswordSchema,
   ForgotPasswordSchemaType,
-} from '../../schemas/forgot-password.schema';
+} from '../../schemas/auth/forgot-password.schema';
 
 export const ForgotPasswordForm: React.FC = () => {
   const forgotPasswordMutation = useForgotPassword();

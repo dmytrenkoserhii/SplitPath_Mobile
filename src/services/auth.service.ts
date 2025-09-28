@@ -1,7 +1,7 @@
 import { API_ENDPOINTS } from '../constants/api-endpoints';
 import { xiorClient } from '../lib/xior-client';
-import { SignInFormSchemaType } from '../schemas/sign-in.schema';
-import { SignUpDataType } from '../schemas/sign-up.schema';
+import { SignInFormSchemaType } from '../schemas/auth/sign-in.schema';
+import { SignUpDataType } from '../schemas/auth/sign-up.schema';
 import { AuthResponse } from '../types/auth';
 import { User } from '../types/user';
 
