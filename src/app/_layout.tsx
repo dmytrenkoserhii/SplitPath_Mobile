@@ -1,26 +1,32 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { MD3DarkTheme, PaperProvider } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
+
 import { AuthNavigator } from '../components/auth';
 import { AuthProvider } from '../context';
 import { queryClient } from '../lib';
 
-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
-import Toast from 'react-native-toast-message';
+const darkTheme = {
+  ...MD3DarkTheme,
+  colors: {
+    ...MD3DarkTheme.colors,
+    primary: '#ffd33d',
+    tertiary: '#7D5260',
+    background: '#1a1b1e',
+    surface: '#25292e',
+    onSurface: '#ffffff',
+    onSurfaceVariant: '#909296',
+    error: '#ff4444',
+  },
+};
 
 export default function RootLayout() {
-  const theme = {
-    ...MD3LightTheme,
-    colors: {
-      ...MD3LightTheme.colors,
-      primary: '#6750A4',
-      tertiary: '#7D5260',
-    },
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
-      <PaperProvider theme={theme}>
+      <PaperProvider theme={darkTheme}>
         <AuthProvider>
           <AuthNavigator>
             <Stack

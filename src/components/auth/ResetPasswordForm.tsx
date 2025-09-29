@@ -8,7 +8,7 @@ import { useResetPassword } from '../../hooks/auth';
 import {
   ResetPasswordSchema,
   ResetPasswordSchemaType,
-} from '../../schemas/reset-password.schema';
+} from '../../schemas/auth/reset-password.schema';
 
 export const ResetPasswordForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);

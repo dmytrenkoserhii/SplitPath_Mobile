@@ -1,19 +1,16 @@
 import { storage } from '../lib/storage';
+import { AuthResponse } from '../types/auth';
 import { User } from '../types/user';
 
-export const saveAuthData = async (authResponse: {
-  user: User;
-  accessToken: string;
-  refreshToken: string;
-}): Promise<void> => {
+export const saveAuthData = async (authResponse: AuthResponse) => {
   try {
-    const { user, accessToken, refreshToken } = authResponse;
+    const { user, tokens } = authResponse;
 
     if (!user) {
       throw new Error('User data is undefined in auth response');
     }
 
-    if (!accessToken && !refreshToken) {
+    if (!tokens.accessToken && !tokens.refreshToken) {
       console.log('🍪 Cookie-based auth - saving user data only');
       await storage.setUserData(JSON.stringify(user));
       console.log('✅ User data saved (cookie-based auth)');
@@ -21,9 +18,13 @@ export const saveAuthData = async (authResponse: {
     }
 
     const accessTokenString =
-      typeof accessToken === 'string' ? accessToken : String(accessToken);
+      typeof tokens.accessToken === 'string'
+        ? tokens.accessToken
+        : String(tokens.accessToken);
     const refreshTokenString =
-      typeof refreshToken === 'string' ? refreshToken : String(refreshToken);
+      typeof tokens.refreshToken === 'string'
+        ? tokens.refreshToken
+        : String(tokens.refreshToken);
 
     await Promise.all([
       storage.setAccessToken(accessTokenString),

@@ -41,39 +41,30 @@ const processQueue = (error: XiorError | null) => {
 
 const requestInterceptor = async (config: XiorInterceptorRequestConfig) => {
   try {
-    const hasTokens = await storage.hasAuthTokens();
     const accessToken = await storage.getAccessToken();
-    const refreshToken = await storage.getRefreshToken();
 
-    console.log('🔍 Auth check:', {
-      hasTokens,
+    console.log('🔍 Interceptor Auth check:', {
       hasAccessToken: !!accessToken,
-      hasRefreshToken: !!refreshToken,
       url: config.url,
     });
 
-    if (hasTokens && accessToken) {
+    if (accessToken) {
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${accessToken}`,
       };
-      console.log('Using token-based authentication');
+      console.log(`Attaching token to ${config.url}`);
     } else {
-      console.log('Using cookie-based authentication for request');
-
-      if (accessToken) {
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${accessToken}`,
-        };
-        console.log('Using stored access token for cookie-based auth');
-      } else {
-        console.log('No access token available - relying on cookies only');
-      }
+      console.log(
+        `No access token found for ${config.url}. Relying on cookies.`
+      );
     }
 
-    console.log('Request headers:', config.headers);
-    console.log('Request URL:', config.url);
+    console.log('Request Config:', {
+      url: config.url,
+      method: config.method,
+      headers: config.headers,
+    });
   } catch (error) {
     console.error('Error in request interceptor:', error);
   }
@@ -168,7 +159,7 @@ const responseInterceptor = (response: any) => {
 
   if (response.config.url?.includes('/auth/sign-in')) {
     console.log('Sign-in response data:', response.data);
-    if (response.data?.accessToken) {
+    if (response.data?.tokens?.accessToken) {
       console.log('Server sent access token in response body');
     } else {
       console.log('Server did NOT send access token in response body');

@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { queryKeys, queryOptions, storage } from '../../lib';
-import { ForgotPasswordSchemaType } from '../../schemas/forgot-password.schema';
-import { SignInFormSchemaType } from '../../schemas/sign-in.schema';
-import { SignUpFormSchemaType } from '../../schemas/sign-up.schema';
+import { ForgotPasswordSchemaType } from '../../schemas/auth/forgot-password.schema';
+import { SignInFormSchemaType } from '../../schemas/auth/sign-in.schema';
+import { SignUpFormSchemaType } from '../../schemas/auth/sign-up.schema';
 import { authService } from '../../services';
 import { AuthResponse } from '../../types/auth';
 import { User } from '../../types/user';
@@ -62,47 +62,45 @@ export const useSignIn = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: SignInFormSchemaType): Promise<AuthResponse> => {
+    mutationFn: async (data: SignInFormSchemaType): Promise<any> => {
       console.log('Calling sign in API...');
       const response = await authService.signIn(data);
-      console.log('API response:', response);
-
-      if (
-        response &&
-        response.user &&
-        !response.accessToken &&
-        !response.refreshToken
-      ) {
-        console.log(
-          'Cookie-based auth detected - tokens should be in HTTP-only cookies'
-        );
-        return {
-          user: response.user,
-          accessToken: '',
-          refreshToken: '',
-        };
-      }
-
+      console.log('Raw API response:', response);
       return response;
     },
     onSuccess: async (data: AuthResponse) => {
-      console.log('Sign in success data:', data);
+      console.log('Sign in success raw data:', data);
 
-      if (!data || !data.user) {
-        console.error('❌ Invalid auth response structure:', data);
+      const accessToken = data?.tokens?.accessToken;
+      const refreshToken = data?.tokens?.refreshToken;
+      const user = data?.user;
+
+      if (!user || !accessToken || !refreshToken) {
+        console.error('❌ Invalid auth response structure from server:', data);
         throw new Error('Invalid response from server');
       }
 
-      await saveAuthData(data);
+      const authData: AuthResponse = {
+        user,
+        tokens: {
+          accessToken,
+          refreshToken,
+        },
+      };
 
-      queryClient.setQueryData(queryKeys.currentUser, data.user);
+      await saveAuthData(authData);
+      console.log('✅ Tokens and user data saved to storage.');
 
-      queryClient.invalidateQueries({ queryKey: queryKeys.user });
+      queryClient.setQueryData(queryKeys.currentUser, user);
+      await queryClient.invalidateQueries({ queryKey: queryKeys.user });
 
-      console.log('✅ Sign in successful');
+      console.log('✅ Sign in successful, state updated.');
     },
     onError: (error: any) => {
-      console.error('❌ Sign in failed:', error);
+      console.error(
+        '❌ Sign in failed:',
+        error.response?.data || error.message
+      );
     },
   });
 };
@@ -122,12 +120,24 @@ export const useSignUp = () => {
     onSuccess: async (data: AuthResponse) => {
       console.log('Sign up success data:', data);
 
-      if (!data || !data.user) {
+      const accessToken = data?.tokens?.accessToken;
+      const refreshToken = data?.tokens?.refreshToken;
+      const user = data?.user;
+
+      if (!user || !accessToken || !refreshToken) {
         console.error('❌ Invalid auth response structure:', data);
         throw new Error('Invalid response from server');
       }
 
-      await saveAuthData(data);
+      const authData: AuthResponse = {
+        user,
+        tokens: {
+          accessToken,
+          refreshToken,
+        },
+      };
+
+      await saveAuthData(authData);
 
       queryClient.setQueryData(queryKeys.currentUser, data.user);
 
