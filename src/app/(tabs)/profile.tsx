@@ -1,6 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -13,30 +11,21 @@ import {
   Title,
   useTheme,
 } from 'react-native-paper';
-import Toast from 'react-native-toast-message';
 
 import { ProfileDisplayView, ProfileEditForm } from '../../components/profile';
 import {
   UpdateAccountFormSchema,
   UpdateAccountFormSchemaType,
 } from '../../schemas/account';
-import { accountsService } from '../../services/accounts.service';
-import { Account } from '../../types/user/account.interface';
+import { useCurrentAccount, useUpdateAccount } from '@/src/hooks';
 
 export default function ProfileScreen() {
   const [isEditing, setIsEditing] = useState(false);
-  const queryClient = useQueryClient();
   const theme = useTheme();
   const styles = createStyles(theme);
 
-  const {
-    data: account,
-    isLoading,
-    error,
-  } = useQuery<Account>({
-    queryKey: ['account'],
-    queryFn: accountsService.getCurrent,
-  });
+  const { data: account, isLoading, error } = useCurrentAccount();
+  const { mutate: updateAccount, isPending: isUpdating } = useUpdateAccount();
 
   const {
     control,
@@ -60,35 +49,13 @@ export default function ProfileScreen() {
     }
   }, [account, reset]);
 
-  const { mutate: updateAccount, isPending: isUpdating } = useMutation<
-    Account,
-    Error,
-    UpdateAccountFormSchemaType
-  >({
-    mutationFn: (values: UpdateAccountFormSchemaType) => {
-      const payload: UpdateAccountFormSchemaType = {
-        ...values,
-        birthDate: values.birthDate ? dayjs(values.birthDate).toDate() : null,
-      };
-      return accountsService.update(payload);
-    },
-    onSuccess: () => {
-      Toast.show({
-        type: 'success',
-        text1: 'Profile Updated',
-        text2: 'Your profile has been updated successfully.',
-      });
-      queryClient.invalidateQueries({ queryKey: ['account'] });
-      setIsEditing(false);
-    },
-    onError: (err: any) => {
-      Toast.show({
-        type: 'error',
-        text1: 'Update Failed',
-        text2: err.message || 'An unexpected error occurred.',
-      });
-    },
-  });
+  const handleUpdateAccount = (formData: UpdateAccountFormSchemaType) => {
+    updateAccount(formData, {
+      onSuccess: () => {
+        setIsEditing(false);
+      },
+    });
+  };
 
   if (isLoading) {
     return (
@@ -128,7 +95,7 @@ export default function ProfileScreen() {
               </Button>
               <Button
                 mode="contained"
-                onPress={handleSubmit(formData => updateAccount(formData))}
+                onPress={handleSubmit(handleUpdateAccount)}
                 loading={isUpdating}
                 disabled={isUpdating}
               >

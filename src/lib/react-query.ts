@@ -14,6 +14,8 @@ export const queryKeys = {
 
   friends: ['friends'] as const,
   friendRequests: ['friends', 'requests'] as const,
+
+  currentAccount: ['account', 'current'] as const,
 } as const;
 
 const defaultQueryOptions = {

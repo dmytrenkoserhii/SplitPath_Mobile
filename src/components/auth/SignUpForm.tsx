@@ -4,8 +4,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { Button, CheckBox, Input, Text } from 'react-native-elements';
-import { useGoogleAuth } from '../../hooks';
-import { useSignUp } from '../../hooks/auth';
+import { useGoogleAuth, useSignUp } from '@/src/hooks';
 import {
   SignUpFormSchema,
   SignUpFormSchemaType,
