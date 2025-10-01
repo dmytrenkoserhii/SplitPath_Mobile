@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { queryKeys, queryOptions } from '../../lib';
-import { usersService } from '../../services';
-import { User } from '../../types/user';
+import { queryKeys, queryOptions } from '@/src/lib';
+import { usersService } from '@/src/services';
+import { User } from '@/src/types/user';
 
 export const useUserById = (id: number) => {
   return useQuery({

@@ -1,5 +1,5 @@
-import { StoryStatus } from '../../enums';
-import { User } from '../user/user.interface';
+import { StoryStatus } from '@/src/enums';
+import { User } from '@/src/types/user';
 import { StorySegment } from './story-segment.interface';
 import { StoryTopic } from './story-topic.interface';
 

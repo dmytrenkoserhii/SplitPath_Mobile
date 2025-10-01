@@ -8,16 +8,15 @@ import {
   Card,
   MD3Theme,
   Text,
-  Title,
   useTheme,
 } from 'react-native-paper';
 
-import { ProfileDisplayView, ProfileEditForm } from '../../components/profile';
+import { ProfileDisplayView, ProfileEditForm } from '@/src/components/profile';
 import {
   UpdateAccountFormSchema,
   UpdateAccountFormSchemaType,
-} from '../../schemas/account';
-import { useCurrentAccount, useUpdateAccount } from '@/src/hooks';
+} from '@/src/schemas/account';
+import { useCurrentAccount, useUpdateAccount } from '@/src/hooks/account';
 
 export default function ProfileScreen() {
   const [isEditing, setIsEditing] = useState(false);
@@ -78,7 +77,9 @@ export default function ProfileScreen() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      <Title style={styles.title}>My Profile</Title>
+      <Text variant="titleLarge" style={styles.title}>
+        My Profile
+      </Text>
       <Card style={styles.card}>
         <Card.Content>
           {isEditing ? (

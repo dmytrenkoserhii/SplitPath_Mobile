@@ -1,4 +1,4 @@
-import { storage } from '../lib/storage';
+import { storage } from '@/src/lib';
 
 export const hasValidSession = async (): Promise<boolean> => {
   try {

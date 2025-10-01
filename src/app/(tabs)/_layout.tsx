@@ -38,24 +38,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="history"
-        options={{
-          title: 'History',
-          tabBarIcon: ({ color }) => (
-            <Entypo name="back-in-time" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="stories"
-        options={{
-          title: 'Stories',
-          tabBarIcon: ({ color }) => (
-            <Feather name="book" color={color} size={24} />
-          ),
-        }}
-      /> */}
       <Tabs.Screen
         name="topics"
         options={{
@@ -67,28 +49,6 @@ export default function TabLayout() {
               color={color}
               size={size}
             />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="chats"
-        options={{
-          title: 'Chats',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="chat-outline"
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="friends"
-        options={{
-          title: 'Friends',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="users" color={color} size={24} />
           ),
         }}
       />

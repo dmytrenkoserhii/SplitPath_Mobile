@@ -1,9 +1,11 @@
-import { CreateTopicModal } from '@/src/components/stories/CreateTopicModal';
-import { TopicCardList } from '@/src/components/stories/TopicCardList';
-import { UpdateTopicModal } from '@/src/components/stories/UpdateTopicModal';
+import {
+  CreateTopicModal,
+  TopicCardList,
+  UpdateTopicModal,
+} from '@/src/components/stories';
 import { StoryTopic } from '@/src/types/story';
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

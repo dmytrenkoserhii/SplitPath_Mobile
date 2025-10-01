@@ -7,17 +7,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { LogoutButton } from '../../components/auth';
-import { CtaButton } from '../../components/home/CtaButton';
-import { Feature } from '../../components/home/Feature';
-import { StepItem } from '../../components/home/StepItem';
-import { StoryPreview } from '../../components/home/StoryPreview';
+import { LogoutButton } from '@/src/components/auth';
+import {
+  CtaButton,
+  Feature,
+  StepItem,
+  StoryPreview,
+} from '@/src/components/home';
 import {
   FEATURED_STORIES,
   FEATURES,
   HOW_IT_WORKS_STEPS,
-} from '../../constants/home';
-import { useAuth } from '../../context';
+} from '@/src/constants';
+import { useAuth } from '@/src/context';
 import { PaymentButton } from '@/src/components/payment';
 
 export default function HomeScreen() {

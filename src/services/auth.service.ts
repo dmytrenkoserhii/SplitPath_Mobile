@@ -1,9 +1,8 @@
-import { API_ENDPOINTS } from '../constants/api-endpoints';
-import { xiorClient } from '../lib/xior-client';
-import { SignInFormSchemaType } from '../schemas/auth/sign-in.schema';
-import { SignUpDataType } from '../schemas/auth/sign-up.schema';
-import { AuthResponse } from '../types/auth';
-import { User } from '../types/user';
+import { API_ENDPOINTS } from '@/src/constants';
+import { xiorClient } from '@/src/lib';
+import { SignInFormSchemaType, SignUpDataType } from '@/src/schemas/auth';
+import { AuthResponse } from '@/src/types/auth';
+import { User } from '@/src/types/user';
 
 export class AuthService {
   async signUp(data: SignUpDataType): Promise<AuthResponse> {

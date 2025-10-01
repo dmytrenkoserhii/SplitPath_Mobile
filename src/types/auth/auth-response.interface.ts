@@ -1,4 +1,4 @@
-import { User } from '../user/user.interface';
+import { User } from '@/src/types/user';
 
 export interface AuthResponse {
   user: User;

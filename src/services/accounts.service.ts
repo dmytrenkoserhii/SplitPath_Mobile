@@ -1,6 +1,6 @@
-import { xiorClient } from '../lib/xior-client';
-import { UpdateAccountFormSchemaType } from '../schemas/account';
-import { Account } from '../types/user/account.interface';
+import { xiorClient } from '@/src/lib';
+import { UpdateAccountFormSchemaType } from '@/src/schemas/account';
+import { Account } from '@/src/types/user';
 
 interface AccountsService {
   getCurrent: () => Promise<Account>;

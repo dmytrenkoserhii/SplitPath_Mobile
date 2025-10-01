@@ -1,30 +1,27 @@
+import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import { Button, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
-import { ReactQueryTags } from '@/src/enums/react-query-tags';
+import { storyTopicsService } from '@/src/services';
 import {
   CreateTopicSchema,
   CreateTopicSchemaType,
-} from '@/src/schemas/stories/create-topic.schema';
-import { StoryTopic } from '@/src/types/story';
-import { storyTopicsService } from '@/src/services/story-topics.service';
+} from '@/src/schemas/stories';
+import { ReactQueryTags } from '@/src/enums';
 
-interface UpdateTopicModalProps {
+interface CreateTopicModalProps {
   visible: boolean;
   onDismiss: () => void;
-  topic: StoryTopic | null;
 }
 
-export const UpdateTopicModal = ({
+export const CreateTopicModal = ({
   visible,
   onDismiss,
-  topic,
-}: UpdateTopicModalProps) => {
+}: CreateTopicModalProps) => {
   const queryClient = useQueryClient();
 
   const {
@@ -35,47 +32,39 @@ export const UpdateTopicModal = ({
   } = useForm<CreateTopicSchemaType>({
     resolver: zodResolver(CreateTopicSchema),
     mode: 'onChange',
+    defaultValues: {
+      name: '',
+      description: '',
+    },
   });
 
-  useEffect(() => {
-    if (topic) {
-      reset({
-        name: topic.name,
-        description: topic.description || '',
-      });
-    }
-  }, [topic, reset]);
-
-  const { mutate: updateTopic, isPending } = useMutation({
-    mutationFn: (values: CreateTopicSchemaType) => {
-      if (!topic) throw new Error('Topic not selected');
-      return storyTopicsService.update(topic.id, values);
-    },
+  const { mutate: createTopic, isPending } = useMutation({
+    mutationFn: (values: CreateTopicSchemaType) =>
+      storyTopicsService.create(values),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [ReactQueryTags.STORY_TOPICS],
       });
       Toast.show({
         type: 'success',
-        text1: 'Topic Updated',
-        text2: 'The topic was updated successfully.',
+        text1: 'Topic Created',
+        text2: 'The topic was created successfully.',
       });
+      reset();
       onDismiss();
     },
     onError: (error: Error) => {
       Toast.show({
         type: 'error',
-        text1: 'Update Failed',
+        text1: 'Creation Failed',
         text2: error.message || 'An unexpected error occurred.',
       });
     },
   });
 
   const onSubmit = (data: CreateTopicSchemaType) => {
-    updateTopic(data);
+    createTopic(data);
   };
-
-  if (!topic) return null;
 
   return (
     <Portal>
@@ -85,7 +74,7 @@ export const UpdateTopicModal = ({
         contentContainerStyle={styles.modalContainer}
       >
         <Text variant="headlineSmall" style={styles.title}>
-          Edit Topic
+          Create New Topic
         </Text>
 
         <Controller
@@ -94,6 +83,7 @@ export const UpdateTopicModal = ({
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               label="Topic Name"
+              placeholder="e.g., Medieval Fantasy"
               value={value}
               onBlur={onBlur}
               onChangeText={onChange}
@@ -112,6 +102,7 @@ export const UpdateTopicModal = ({
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               label="Story Generation Guide"
+              placeholder="Describe the theme, setting, etc."
               value={value}
               onBlur={onBlur}
               onChangeText={onChange}
@@ -137,7 +128,7 @@ export const UpdateTopicModal = ({
             disabled={!isValid || isPending}
             style={styles.button}
           >
-            Save Changes
+            Create
           </Button>
         </View>
       </Modal>
@@ -152,13 +143,24 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 10,
   },
-  title: { marginBottom: 20, textAlign: 'center' },
-  input: { marginBottom: 10 },
-  errorText: { color: 'red', marginBottom: 10, marginTop: -5 },
+  title: {
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    marginBottom: 10,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+    marginTop: -5,
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 20,
   },
-  button: { marginLeft: 10 },
+  button: {
+    marginLeft: 10,
+  },
 });

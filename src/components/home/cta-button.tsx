@@ -9,6 +9,7 @@ interface CtaButtonProps {
   iconName?: keyof typeof Ionicons.glyphMap;
 }
 
+// TODO: investigate
 export const CtaButton = ({ onPress, title, iconName }: CtaButtonProps) => {
   return (
     <TouchableOpacity style={styles.ctaButtonContainer} onPress={onPress}>

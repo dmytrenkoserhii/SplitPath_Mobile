@@ -5,10 +5,12 @@ import React from 'react';
 import { MD3DarkTheme, PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
-import { AuthNavigator } from '../components/auth';
-import { AuthProvider } from '../context';
-import { queryClient } from '../lib';
+import { AuthNavigator } from '@/src/components/auth';
+import { AuthProvider } from '@/src/context';
+import { queryClient } from '@/src/lib';
 
+// TODO: use theme in whole project instead of hardcoding colors
+// TODO: investigate CtaButton component
 const darkTheme = {
   ...MD3DarkTheme,
   colors: {

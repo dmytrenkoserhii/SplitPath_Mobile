@@ -1,7 +1,8 @@
-import { storage } from '../lib/storage';
-import { AuthResponse } from '../types/auth';
-import { User } from '../types/user';
+import { storage } from '@/src/lib';
+import { AuthResponse } from '@/src/types/auth';
+import { User } from '@/src/types/user';
 
+// TODO: double check
 export const saveAuthData = async (authResponse: AuthResponse) => {
   try {
     const { user, tokens } = authResponse;

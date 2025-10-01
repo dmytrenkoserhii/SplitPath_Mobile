@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { View, StyleSheet } from 'react-native';
 import { MD3Theme, Text, useTheme } from 'react-native-paper';
-import { Account } from '../../types/user/account.interface';
+import { Account } from '@/src/types/user';
 
 const ProfileDetail = ({
   label,

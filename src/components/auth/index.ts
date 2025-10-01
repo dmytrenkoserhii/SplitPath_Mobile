@@ -1,10 +1,9 @@
-// Export all auth components
-export { AuthLoadingScreen } from './AuthLoadingScreen';
-export { AuthNavigator } from './AuthNavigator';
-export { EmailVerificationScreen } from './EmailVerificationScreen';
-export { ForgotPasswordForm } from './ForgotPasswordForm';
-export { GoogleAuthButton } from './GoogleAuthButton';
-export { LogoutButton } from './LogoutButton';
-export { ResetPasswordForm } from './ResetPasswordForm';
-export { SignInForm } from './SignInForm';
-export { SignUpForm } from './SignUpForm';
+export { AuthLoadingScreen } from './auth-loading-screen';
+export { AuthNavigator } from './auth-navigator';
+export { EmailVerificationScreen } from './email-verification-screen';
+export { ForgotPasswordForm } from './forgot-password-form';
+export { GoogleAuthButton } from './google-auth-button';
+export { LogoutButton } from './logout-button';
+export { ResetPasswordForm } from './reset-password-form';
+export { SignInForm } from './sign-in-form';
+export { SignUpForm } from './sign-up-form';

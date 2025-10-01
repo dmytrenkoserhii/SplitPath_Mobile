@@ -1,5 +1,5 @@
-import { API_ENDPOINTS } from '../constants/api-endpoints';
-import { xiorClient } from '../lib/xior-client';
+import { API_ENDPOINTS } from '@/src/constants';
+import { xiorClient } from '@/src/lib';
 
 interface CreateCheckoutResponse {
   checkoutUrl: string;

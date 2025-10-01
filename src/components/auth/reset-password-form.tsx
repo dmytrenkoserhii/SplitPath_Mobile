@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert, StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
-import { useResetPassword } from '../../hooks/auth';
+import { useResetPassword } from '@/src/hooks/auth';
 import {
   ResetPasswordSchema,
   ResetPasswordSchemaType,
-} from '../../schemas/auth/reset-password.schema';
+} from '@/src/schemas/auth/reset-password.schema';
 
 export const ResetPasswordForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);

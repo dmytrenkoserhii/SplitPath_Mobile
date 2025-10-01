@@ -2,8 +2,7 @@ import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
-// import { useAuth } from "../../context";
-import { xiorClient } from '../../lib';
+import { xiorClient } from '@/src/lib';
 
 interface GoogleAuthButtonProps {
   title?: string;
@@ -19,7 +18,6 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
   titleStyle,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  // const { signIn } = useAuth();
 
   const handleGoogleAuth = async () => {
     setIsLoading(true);

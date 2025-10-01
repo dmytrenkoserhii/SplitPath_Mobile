@@ -3,10 +3,10 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
 
-import { TopicCard } from './TopicCard';
+import { TopicCard } from './topic-card';
 import { StoryTopic } from '@/src/types/story';
-import { ReactQueryTags } from '@/src/enums/react-query-tags';
-import { storyTopicsService } from '@/src/services/story-topics.service';
+import { ReactQueryTags } from '@/src/enums';
+import { storyTopicsService } from '@/src/services';
 
 interface TopicCardListProps {
   onEditTopic: (topic: StoryTopic) => void;

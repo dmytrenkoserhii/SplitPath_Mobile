@@ -30,8 +30,6 @@ sign-up.tsx
 
 ./app/(tabs):
 _layout.tsx
-chats.tsx
-friends.tsx
 index.tsx
 profile.tsx
 stories/

@@ -2,8 +2,8 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Feather';
-import { useVerifyEmail } from '../../hooks/auth';
+import { Feather } from '@expo/vector-icons';
+import { useVerifyEmail } from '@/src/hooks/user';
 
 export const EmailVerificationScreen: React.FC = () => {
   const { token } = useLocalSearchParams<{ token?: string }>();
@@ -29,7 +29,7 @@ export const EmailVerificationScreen: React.FC = () => {
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
-          <Icon name="mail" size={64} color="#007AFF" style={styles.icon} />
+          <Feather name="mail" size={64} color="#007AFF" style={styles.icon} />
           <Text style={styles.title}>Verifying Email...</Text>
           <Text style={styles.subtitle}>
             Please wait while we verify your email address.
@@ -44,7 +44,12 @@ export const EmailVerificationScreen: React.FC = () => {
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
-          <Icon name="x-circle" size={64} color="#e74c3c" style={styles.icon} />
+          <Feather
+            name="x-circle"
+            size={64}
+            color="#e74c3c"
+            style={styles.icon}
+          />
           <Text style={styles.title}>Email Verification Failed</Text>
           {error && (
             <Text style={styles.errorText}>

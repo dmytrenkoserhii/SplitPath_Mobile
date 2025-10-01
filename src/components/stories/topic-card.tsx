@@ -5,8 +5,8 @@ import { Button, Card, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 import { StoryTopic } from '@/src/types/story';
-import { storyTopicsService } from '@/src/services/story-topics.service';
-import { ReactQueryTags } from '@/src/enums/react-query-tags';
+import { storyTopicsService } from '@/src/services';
+import { ReactQueryTags } from '@/src/enums';
 
 interface TopicCardProps {
   topic: StoryTopic;

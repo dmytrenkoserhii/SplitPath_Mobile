@@ -1,5 +1,5 @@
-import { Role } from '../../enums';
-import { Story } from '../story/story.interface';
+import { Role } from '@/src/enums';
+import { Story } from '@/src/types/story';
 import { Account } from './account.interface';
 
 export interface User {

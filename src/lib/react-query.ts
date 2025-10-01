@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 
+// TODO: perhaps move to constants
 export const queryKeys = {
   user: ['user'] as const,
   currentUser: ['user', 'current'] as const,
@@ -11,9 +12,6 @@ export const queryKeys = {
 
   stories: ['stories'] as const,
   story: (id: number) => ['stories', id] as const,
-
-  friends: ['friends'] as const,
-  friendRequests: ['friends', 'requests'] as const,
 
   currentAccount: ['account', 'current'] as const,
 } as const;
@@ -39,6 +37,7 @@ export const queryClient = new QueryClient({
   },
 });
 
+// TODO: check
 export const queryOptions = {
   user: {
     staleTime: 2 * 60 * 1000,

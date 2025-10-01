@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { paymentsService } from '@/src/services/payment.service';
-import { ReactQueryTags } from '@/src/enums/react-query-tags';
+import { paymentsService } from '@/src/services';
 
 export const useCreateCheckout = (onSuccess: (data: any) => void) => {
   return useMutation({

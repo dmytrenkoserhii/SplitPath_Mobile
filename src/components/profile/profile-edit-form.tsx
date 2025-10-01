@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { MD3Theme, Text, TextInput, useTheme } from 'react-native-paper';
 import dayjs from 'dayjs';
 
-import { UpdateAccountFormSchemaType } from '../../schemas/account';
+import { UpdateAccountFormSchemaType } from '@/src/schemas/account';
 
 type ProfileEditFormProps = {
   control: Control<UpdateAccountFormSchemaType>;

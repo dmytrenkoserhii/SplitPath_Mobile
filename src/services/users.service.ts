@@ -1,5 +1,5 @@
-import { xiorClient } from '../lib/xior-client';
-import { User } from '../types/user';
+import { xiorClient } from '@/src/lib';
+import { User } from '@/src/types/user';
 
 export class UsersService {
   async findAll(): Promise<User[]> {

@@ -4,11 +4,11 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert, StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
-import { useForgotPassword } from '../../hooks/auth';
+import { useForgotPassword } from '@/src/hooks/auth';
 import {
   ForgotPasswordSchema,
   ForgotPasswordSchemaType,
-} from '../../schemas/auth/forgot-password.schema';
+} from '@/src/schemas/auth/forgot-password.schema';
 
 export const ForgotPasswordForm: React.FC = () => {
   const forgotPasswordMutation = useForgotPassword();

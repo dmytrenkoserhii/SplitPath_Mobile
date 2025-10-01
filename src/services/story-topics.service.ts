@@ -1,8 +1,8 @@
 import { XiorResponse } from 'xior';
 
-import { xiorClient } from '../lib/xior-client';
-import { CreateTopicSchemaType } from '../schemas/stories/create-topic.schema';
-import { StoryTopic } from '../types/story/story-topic.interface';
+import { xiorClient } from '@/src/lib';
+import { CreateTopicSchemaType } from '@/src/schemas/stories';
+import { StoryTopic } from '@/src/types/story';
 
 interface StoryTopicsApi {
   findAll: () => Promise<StoryTopic[]>;

@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import Toast from 'react-native-toast-message';
-import { queryKeys } from '../../lib';
-import { UpdateAccountFormSchemaType } from '../../schemas/account';
-import { accountsService } from '../../services';
-import { Account } from '../../types/user/account.interface';
+import { queryKeys } from '@/src/lib';
+import { UpdateAccountFormSchemaType } from '@/src/schemas/account';
+import { accountsService } from '@/src/services';
+import { Account } from '@/src/types/user';
 
 export const useCurrentAccount = () => {
   return useQuery({

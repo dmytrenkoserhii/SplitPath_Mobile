@@ -1,19 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
-import { queryKeys, queryOptions, storage } from '../../lib';
-import { ForgotPasswordSchemaType } from '../../schemas/auth/forgot-password.schema';
-import { SignInFormSchemaType } from '../../schemas/auth/sign-in.schema';
-import { SignUpFormSchemaType } from '../../schemas/auth/sign-up.schema';
-import { authService } from '../../services';
-import { AuthResponse } from '../../types/auth';
-import { User } from '../../types/user';
+import { queryKeys, queryOptions, storage } from '@/src/lib';
+import {
+  ForgotPasswordSchemaType,
+  SignInFormSchemaType,
+  SignUpFormSchemaType,
+} from '@/src/schemas/auth';
+import { authService } from '@/src/services';
+import { AuthResponse } from '@/src/types/auth';
+import { User } from '@/src/types/user';
 
-import { hasValidSession } from '../../utils/auth-session.utils';
+import { hasValidSession } from '@/src/utils/auth-session.utils';
 import {
   clearAuthData,
   getStoredUser,
   saveAuthData,
-} from '../../utils/auth-storage.utils';
+} from '@/src/utils/auth-storage.utils';
 
 export const useCurrentUser = () => {
   return useQuery({

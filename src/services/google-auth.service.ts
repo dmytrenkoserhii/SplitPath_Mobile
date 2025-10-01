@@ -1,8 +1,8 @@
 import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
-import { storage, xiorClient } from '../lib';
-import { AuthResponse } from '../types/auth';
+import { storage, xiorClient } from '@/src/lib';
+import { AuthResponse } from '@/src/types/auth';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -48,8 +48,10 @@ export class GoogleAuthService {
 
         return {
           user: userResponse.data,
-          accessToken: accessToken || '',
-          refreshToken: refreshToken || '',
+          tokens: {
+            accessToken: accessToken || '',
+            refreshToken: refreshToken || '',
+          },
         } as AuthResponse;
       }
     } catch (authError) {}
@@ -112,11 +114,12 @@ export class GoogleAuthService {
 
         return {
           user: userResponse.data,
-          accessToken,
-          refreshToken,
+          tokens: {
+            accessToken: accessToken || '',
+            refreshToken: refreshToken || '',
+          },
         } as AuthResponse;
       }
-
       const authCode = url.searchParams.get('code');
       if (authCode) {
         const response = await xiorClient.post('/auth/google/callback', {

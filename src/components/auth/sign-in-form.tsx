@@ -4,11 +4,11 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert, StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
-import { useGoogleAuth, useSignIn } from '@/src/hooks';
+import { useGoogleAuth, useSignIn } from '@/src/hooks/auth';
 import {
   SignInFormSchema,
   SignInFormSchemaType,
-} from '../../schemas/auth/sign-in.schema';
+} from '@/src/schemas/auth/sign-in.schema';
 
 export const SignInForm: React.FC = () => {
   const signInMutation = useSignIn();

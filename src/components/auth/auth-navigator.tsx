@@ -1,8 +1,8 @@
 import { usePathname, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
-import { PUBLIC_ROUTES } from '../../constants/auth';
-import { useAuth } from '../../context';
-import { AuthLoadingScreen } from './AuthLoadingScreen';
+import { PUBLIC_ROUTES } from '@/src/constants';
+import { useAuth } from '@/src/context';
+import { AuthLoadingScreen } from './auth-loading-screen';
 
 interface AuthNavigatorProps {
   children: React.ReactNode;

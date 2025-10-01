@@ -1,8 +1,8 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import { Button } from 'react-native-elements';
-import { useAuth } from '../../context';
-import { useSignOut } from '../../hooks/auth';
+import { useAuth } from '@/src/context';
+import { useSignOut } from '@/src/hooks/auth';
 
 interface LogoutButtonProps {
   title?: string;
