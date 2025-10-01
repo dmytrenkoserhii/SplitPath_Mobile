@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { GoogleAuthService } from '../services/google-auth.service';
-import { AuthResponse } from '../types/auth';
-import { User } from '../types/user';
-import { saveAuthData } from '../utils/auth-storage.utils';
+import { GoogleAuthService } from '../../services/google-auth.service';
+import { AuthResponse } from '../../types/auth';
+import { User } from '../../types/user';
+import { saveAuthData } from '../../utils/auth-storage.utils';
 
 export const useGoogleAuth = () => {
   const [isLoading, setIsLoading] = useState(false);

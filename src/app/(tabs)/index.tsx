@@ -18,6 +18,7 @@ import {
   HOW_IT_WORKS_STEPS,
 } from '../../constants/home';
 import { useAuth } from '../../context';
+import { PaymentButton } from '@/src/components/payment';
 
 export default function HomeScreen() {
   const navigateToStories = () => router.push('/(tabs)/stories');
@@ -30,6 +31,8 @@ export default function HomeScreen() {
 
         {isAuthenticated && user && (
           <View style={styles.userSection}>
+            <PaymentButton />
+
             <Text style={styles.welcomeText}>
               Welcome back, {user.account?.username || user.email}! 👋
             </Text>

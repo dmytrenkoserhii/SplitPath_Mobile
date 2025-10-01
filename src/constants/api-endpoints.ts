@@ -9,4 +9,5 @@ export const API_ENDPOINTS = {
   VERIFY_EMAIL: '/users/verify-email',
   RESEND_VERIFICATION: '/users/resend-verification',
   STORY_TOPICS: '/story-topics',
+  CREATE_CHECKOUT: '/payments/create-checkout',
 } as const;
