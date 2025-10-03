@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { ActivityIndicator, Text } from 'react-native-paper';
+import { ActivityIndicator, Text, useTheme } from 'react-native-paper';
 
 import { TopicCard } from './topic-card';
 import { StoryTopic } from '@/src/types/story';
@@ -13,6 +13,9 @@ interface TopicCardListProps {
 }
 
 export const TopicCardList = ({ onEditTopic }: TopicCardListProps) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
+
   const {
     data: topics,
     isLoading,
@@ -58,15 +61,18 @@ export const TopicCardList = ({ onEditTopic }: TopicCardListProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-  },
-  list: {
-    paddingHorizontal: 16,
-    paddingBottom: 80,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    centered: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 50,
+      backgroundColor: theme.colors.background,
+    },
+    list: {
+      paddingHorizontal: 16,
+      paddingBottom: 80,
+      backgroundColor: theme.colors.background,
+    },
+  });

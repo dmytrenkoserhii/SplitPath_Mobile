@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Button, Card, Text } from 'react-native-paper';
+import { Button, Card, Text, useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 import { StoryTopic } from '@/src/types/story';
@@ -14,6 +14,8 @@ interface TopicCardProps {
 }
 
 export const TopicCard = ({ topic, onEdit }: TopicCardProps) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const queryClient = useQueryClient();
 
   const { mutate: deleteTopic } = useMutation({
@@ -70,8 +72,10 @@ export const TopicCard = ({ topic, onEdit }: TopicCardProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  card: {
-    marginVertical: 8,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    card: {
+      marginVertical: 8,
+      backgroundColor: theme.colors.surface,
+    },
+  });
