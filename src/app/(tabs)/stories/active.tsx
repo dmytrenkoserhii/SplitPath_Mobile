@@ -1,22 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StoryList } from '@/src/components/stories';
+import { StoryStatus } from '@/src/enums';
 
-export default function AboutScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>About screen</Text>
-    </View>
-  );
+export default function ActiveStoriesScreen() {
+  const activeStatuses = `${StoryStatus.NEW},${StoryStatus.IN_PROGRESS}`;
+
+  return <StoryList status={activeStatuses} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#25292e',
-  },
-  text: {
-    color: '#fff',
-  },
-});
